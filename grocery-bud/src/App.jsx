@@ -1,6 +1,14 @@
-import { useState } from 'react'
-
-
+import React, { useState, useEffect } from 'react';
+import List from './List';
+import Alert from './Alert';
+const getLocalStorage = () => {
+  let list = localStorage.getItem('list');
+  if (list) {
+    return (list = JSON.parse(localStorage.getItem('list')));
+  } else {
+    return [];
+  }
+};
 function App() {
   const [name, setName] = useState('');
   const [list, setList] = useState(getLocalStorage());
