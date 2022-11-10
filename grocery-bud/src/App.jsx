@@ -2,8 +2,26 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const showAlert = (show = false, type = '', msg = '') => {
+    setAlert({ show, type, msg });
+  };
+  const clearList = () => {
+    showAlert(true, 'danger', 'empty list');
+    setList([]);
+  };
+  const removeItem = (id) => {
+    showAlert(true, 'danger', 'item removed');
+    setList(list.filter((item) => item.id !== id));
+  };
+  const editItem = (id) => {
+    const specificItem = list.find((item) => item.id === id);
+    setIsEditing(true);
+    setEditID(id);
+    setName(specificItem.title);
+  };
+  useEffect(() => {
+    localStorage.setItem('list', JSON.stringify(list));
+  }, [list]);
   return (
     <section className='section-center'>
     <form className='grocery-form' onSubmit={handleSubmit}>
