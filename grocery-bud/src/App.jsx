@@ -1,34 +1,38 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <section className='section-center'>
+    <form className='grocery-form' onSubmit={handleSubmit}>
+      {alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />}
+
+      <h3>grocery bud</h3>
+      <div className='form-control'>
+        <input
+          type='text'
+          className='grocery'
+          placeholder='e.g. eggs'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <button type='submit' className='submit-btn'>
+          {isEditing ? 'edit' : 'submit'}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    </form>
+    {list.length > 0 && (
+      <div className='grocery-container'>
+        <List items={list} removeItem={removeItem} editItem={editItem} />
+        <button className='clear-btn' onClick={clearList}>
+          clear items
+        </button>
+      </div>
+    )}
+  </section>
+);
 }
 
 export default App
